@@ -1,3 +1,4 @@
+import { ViewInterface } from './../interface/viewInterface';
 /**
  * @name Auteur
  * @desc Définition des auteurs de livres
@@ -30,6 +31,12 @@ export class Auteur {
      */
     public biographie: string;
 
+    private viewMode: ViewInterface;
+
+    public constructor(viewStrategy: ViewInterface) {
+        this.viewMode = viewStrategy;
+    }
+
     /**
      * Définit la date de naissance de l'auteur
      * @param date: string Date sous la forme d'une chaîne
@@ -45,5 +52,9 @@ export class Auteur {
             month.toString() + '-' +
             this.dateNaissance.getFullYear().toString();
         return date;
+    }
+
+    public toString() {
+        return this.viewMode.view(this);
     }
 }

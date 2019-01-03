@@ -1,3 +1,4 @@
+import { Auteur } from './auteur';
 /**
  * @name Livre
  * @desc Définition des attributs d'un livre
@@ -19,8 +20,19 @@ export class Livre {
     public titre: string;
 
     /**
-     * @var string
+     * @var Auteur
      * Auteur du livre
      */
-    public auteur: string;
+    public auteur: Auteur;
+
+    public constructor() {
+        console.log('Livre is alive !');
+    }
+
+    /**
+     * Surcharge (overload) de la méthode toString() générale
+     */
+    public toString(): string {
+        return this.titre + ' écrit par ' + this.auteur.toString();
+    }
 }

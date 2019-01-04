@@ -14,6 +14,7 @@ import { AsNom } from './interface/asNom';
   */
  import { Livre } from './models/livre';
 import { Auteur } from './models/auteur';
+import { Loueur } from './models/loueur';
 
  // Créer un auteur
  const isaac: Auteur = new Auteur(new AsNom());
@@ -42,3 +43,14 @@ console.log('Auteur : ' + isaac.nom + ' Né le : ' + isaac.getDateNaissance());
 
  console.log('Livre : ' + lesMiserables.toString());
  console.log('Livre : ' + fondation.toString());
+
+ // Création d'un Loueur
+ const loueur: Loueur = new Loueur();
+loueur.nom('Aubert');
+loueur.prenom('Jean-Luc');
+loueur.numAdherent('00112233');
+loueur.asHTML();
+
+// Affichage des livres
+lesMiserables.asHTML();
+fondation.asHTML();

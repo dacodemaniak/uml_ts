@@ -1,3 +1,4 @@
+import { HtmlInterface } from './../interface/htmlInterface';
 import { ViewInterface } from './../interface/viewInterface';
 /**
  * @name Auteur
@@ -6,7 +7,7 @@ import { ViewInterface } from './../interface/viewInterface';
  * @author Aélion
  * @version 1.0.0
  */
-export class Auteur {
+export class Auteur implements HtmlInterface {
     /**
      * @var string
      * Nom de l'auteur
@@ -35,6 +36,7 @@ export class Auteur {
 
     public constructor(viewStrategy: ViewInterface) {
         this.viewMode = viewStrategy;
+        this.biographie = null;
     }
 
     /**
@@ -56,5 +58,20 @@ export class Auteur {
 
     public toString() {
         return this.viewMode.view(this);
+    }
+
+    public asHTML(): string {
+        let content: string = '';
+        content += '<dl>';
+        content += '<dt><em>' + this.nom + ' ' + this.prenom  + '</em></dt>';
+        content += '<dd><ul>'; 
+        content += '<li>' + this.getDateNaissance() + '</li>';
+        if (this.biographie !== null) {
+            content += '<li>' + this.biographie + '</li>';
+        }
+        content += '</ul></dd>';
+        content += '</dl>';
+
+        return content;
     }
 }

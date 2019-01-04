@@ -1,3 +1,7 @@
+import { Loueur } from './loueur';
+import { HtmlInterface } from './../interface/htmlInterface';
+import { Livre } from "./livre";
+
 /**
  * @name Utilisateur
  * @desc Définition "abstraite" des utilisateurs
@@ -5,7 +9,7 @@
  * @author Aélion
  * @version 1.0.0
  */
-export abstract class Utilisateur {
+export abstract class Utilisateur implements HtmlInterface {
     protected _nom: string;
     protected _prenom: string;
     protected _numAdherent: string;
@@ -42,4 +46,23 @@ export abstract class Utilisateur {
         this._numAdherent = numAdherent;
         return this;
     }
+
+    public asHTML(): void {
+        let content: string = '';
+        content += '<p><strong>N° adhérent :</strong>' + this._numAdherent  + '</p>';
+        if (this instanceof Loueur) {
+            content += '<blockquote>Loueur</blockquote>';
+        } else {
+            content += '<blockquote>Emprunteur</blockquote>';
+        }
+        content += '<p>Nom : ' + this._nom + '</p>';
+        content += '<p>Prénom :' + this._prenom + '</p>';
+
+        const body = document.querySelector('#user');
+
+        body.innerHTML = content;
+    }
+    public abstract add(livre: Livre): Utilisateur;
+
+    public abstract remove(indice: number): Utilisateur;
 }

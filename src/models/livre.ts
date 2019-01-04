@@ -1,4 +1,6 @@
+import { HtmlInterface } from './../interface/htmlInterface';
 import { Auteur } from './auteur';
+
 /**
  * @name Livre
  * @desc Définition des attributs d'un livre
@@ -6,7 +8,7 @@ import { Auteur } from './auteur';
  * @package models
  * @version 1.0.0
  */
-export class Livre {
+export class Livre implements HtmlInterface {
     /**
      * @var string
      * N° ISBN
@@ -34,5 +36,16 @@ export class Livre {
      */
     public toString(): string {
         return this.titre + ' écrit par ' + this.auteur.toString();
+    }
+
+    public asHTML(): void {
+        let content: string = '';
+
+        content += '<h2>' + this.titre + '</h2>';
+        content += this.auteur.asHTML();
+
+        const book: any = document.querySelector('#book');
+
+        book.innerHTML += content;
     }
 }

@@ -1,4 +1,3 @@
-import { Loueur } from './loueur';
 import { HtmlInterface } from './../interface/htmlInterface';
 import { Livre } from "./livre";
 
@@ -47,21 +46,19 @@ export abstract class Utilisateur implements HtmlInterface {
         return this;
     }
 
-    public asHTML(): void {
+    public asHTML(): string {
         let content: string = '';
+
         content += '<p><strong>N° adhérent :</strong>' + this._numAdherent  + '</p>';
-        if (this instanceof Loueur) {
-            content += '<blockquote>Loueur</blockquote>';
-        } else {
-            content += '<blockquote>Emprunteur</blockquote>';
-        }
+
         content += '<p>Nom : ' + this._nom + '</p>';
         content += '<p>Prénom :' + this._prenom + '</p>';
 
-        const body = document.querySelector('#user');
-
-        body.innerHTML = content;
+        return content;
     }
+
+    public abstract clone(): Utilisateur;
+
     public abstract add(livre: Livre): Utilisateur;
 
     public abstract remove(indice: number): Utilisateur;

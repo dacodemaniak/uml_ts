@@ -1,3 +1,4 @@
+import { Emprunteur } from './models/emprunteur';
 import { AsNomPrenomDate } from './interface/asNomPrenomDate';
 import { AsNom } from './interface/asNom';
 /**
@@ -49,8 +50,33 @@ console.log('Auteur : ' + isaac.nom + ' Né le : ' + isaac.getDateNaissance());
 loueur.nom('Aubert');
 loueur.prenom('Jean-Luc');
 loueur.numAdherent('00112233');
+loueur.add(lesMiserables);
+loueur.add(fondation);
 loueur.asHTML();
 
-// Affichage des livres
-lesMiserables.asHTML();
-fondation.asHTML();
+const unAutreEmprunteur: Emprunteur = loueur.clone();
+console.log(unAutreEmprunteur.nom());
+
+// Création d'un emprunteur
+const emprunteur: Emprunteur = new Emprunteur();
+emprunteur.nom('Zetaufré');
+emprunteur.prenom('Mélanie');
+emprunteur.numAdherent('11223344');
+// Louer un bouquin
+if (emprunteur.emprunte(loueur, lesMiserables)) {
+    alert('Okay, je te laisse le bouquin !');
+} else {
+    alert('Désolé mon pote, mais je n\'ai plus en stock !');
+}
+
+// On essaye de réemprunter le même bouquin
+if (unAutreEmprunteur.emprunte(loueur, lesMiserables)) {
+    alert('Okay, je te laisse le bouquin !');
+} else {
+    alert('Désolé mon pote, mais je n\'ai plus en stock !');
+}
+
+// Affichage des emprunteurs et loueurs
+loueur.asHTML();
+emprunteur.asHTML();
+unAutreEmprunteur.asHTML();

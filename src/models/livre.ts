@@ -38,14 +38,12 @@ export class Livre implements HtmlInterface {
         return this.titre + ' écrit par ' + this.auteur.toString();
     }
 
-    public asHTML(): void {
+    public asHTML(): string {
         let content: string = '';
 
         content += '<h2>' + this.titre + '</h2>';
         content += this.auteur.asHTML();
 
-        const book: any = document.querySelector('#book');
-
-        book.innerHTML += content;
+        return content;
     }
 }
